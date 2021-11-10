@@ -68,6 +68,55 @@ namespace oop5
                 return false;
         }
 
+        public static bool operator == (RationalNumbers a, RationalNumbers b)
+        {
+            if (a._numerator / a._denominator == b._numerator / b._denominator)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator != (RationalNumbers a, RationalNumbers b)
+        {
+            if (a._numerator / a._denominator != b._numerator / b._denominator)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >= (RationalNumbers a, RationalNumbers b)
+        {
+            if (a._numerator / a._denominator >= b._numerator / b._denominator)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator <= (RationalNumbers a, RationalNumbers b)
+        {
+            if (a._numerator / a._denominator <= b._numerator / b._denominator)
+                return true;
+            else
+                return false;
+        }
+
+        public override string ToString() => $"{_numerator}/{_denominator}";
+
+        public static explicit operator int (RationalNumbers a)
+        {
+            return (int)a._numerator / a._denominator;
+        }
+
+        public static explicit operator float(RationalNumbers a)
+        {
+            return (float)a._numerator / a._denominator;
+        }
+
+        public static explicit operator double(RationalNumbers a)
+        {
+            return (double)a._numerator / a._denominator;
+        }
+
 
     }
 }
