@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace oop2
+namespace oop6
 {
     public class BillInBank
     {
@@ -76,5 +76,38 @@ namespace oop2
                 Console.WriteLine("На счету недостаточно средств!");
             }
         }
+
+
+        public static bool operator ==(BillInBank a, BillInBank b) => a.Equals(b);
+
+        public static bool operator !=(BillInBank a, BillInBank b) => !a.Equals(b);
+
+        public override string ToString() => $"Ваш счет: номер {_billNumber}, тип счета: {_billType}, баланс {_balance}";
+
+        public bool Equals (BillInBank other)
+        {
+            if (other is null) return false;
+            if (ReferenceEquals(other, this)) return true;
+            return _balance == other._balance 
+                && _billNumber == other._billNumber 
+                && _billType == other._billType;
+        }
+
+        public override bool Equals(object obj) => Equals(obj as BillInBank);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = _balance.GetHashCode();
+
+                hash = (hash * 397) ^ _billNumber.GetHashCode();
+                hash = (hash * 397) ^ _billType.GetHashCode();
+
+                return hash;
+
+            }
+        }
+
     }
 }

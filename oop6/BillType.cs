@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace oop2
+namespace oop6
 {
     public enum BillType
     {

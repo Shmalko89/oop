@@ -6,7 +6,14 @@ namespace oop6
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var a = new BillInBank(127, BillType.Deposit);
+            var b = new BillInBank(182, BillType.Deposit);
+
+            Console.WriteLine(a == b);
+            Console.WriteLine(a !=b);
+
+            Console.WriteLine(a.ToString());
+            Console.WriteLine(b.ToString());
         }
     }
 }
