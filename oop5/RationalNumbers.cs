@@ -16,43 +16,43 @@ namespace oop5
 
         public int Denomirator => _denominator;
 
-        public RationalNumbers (int numerator, int denominator)
+        public RationalNumbers(int numerator, int denominator)
         {
             _numerator = numerator;
             _denominator = denominator;
         }
 
-        public static RationalNumbers operator + (RationalNumbers a, RationalNumbers b)
+        public static RationalNumbers operator +(RationalNumbers a, RationalNumbers b)
         {
             return new RationalNumbers(a._numerator * b._denominator + b._numerator * a._denominator, a._denominator * b._denominator);
         }
 
-        public static RationalNumbers operator - (RationalNumbers a, RationalNumbers b)
+        public static RationalNumbers operator -(RationalNumbers a, RationalNumbers b)
         {
             return new RationalNumbers(a._numerator * b._denominator - b._numerator * a._denominator, a._denominator * b._denominator);
         }
 
-        public static RationalNumbers operator * (RationalNumbers a, RationalNumbers b)
+        public static RationalNumbers operator *(RationalNumbers a, RationalNumbers b)
         {
             return new RationalNumbers(a._numerator * b._numerator, a._denominator * b._denominator);
         }
 
-        public static RationalNumbers operator / (RationalNumbers a, RationalNumbers b)
+        public static RationalNumbers operator /(RationalNumbers a, RationalNumbers b)
         {
             return new RationalNumbers(a._numerator * b._denominator, a._denominator * b._numerator);
         }
 
-        public static RationalNumbers operator ++ (RationalNumbers a)
-        {
-            return a + new RationalNumbers(1, 1);
-        } 
-
-        public static RationalNumbers operator -- (RationalNumbers a)
+        public static RationalNumbers operator ++(RationalNumbers a)
         {
             return a + new RationalNumbers(1, 1);
         }
 
-        public static bool operator > (RationalNumbers a, RationalNumbers b)
+        public static RationalNumbers operator --(RationalNumbers a)
+        {
+            return a + new RationalNumbers(1, 1);
+        }
+
+        public static bool operator >(RationalNumbers a, RationalNumbers b)
         {
             if (a._numerator * b._denominator > b._numerator * a._denominator)
                 return true;
@@ -68,23 +68,13 @@ namespace oop5
                 return false;
         }
 
-        public static bool operator == (RationalNumbers a, RationalNumbers b)
-        {
-            if (a._numerator / a._denominator == b._numerator / b._denominator)
-                return true;
-            else
-                return false;
-        }
+        public static bool operator ==(RationalNumbers a, RationalNumbers b) => a.Equals(b);
 
-        public static bool operator != (RationalNumbers a, RationalNumbers b)
-        {
-            if (a._numerator / a._denominator != b._numerator / b._denominator)
-                return true;
-            else
-                return false;
-        }
 
-        public static bool operator >= (RationalNumbers a, RationalNumbers b)
+        public static bool operator !=(RationalNumbers a, RationalNumbers b) => !a.Equals(b);
+
+
+        public static bool operator >=(RationalNumbers a, RationalNumbers b)
         {
             if (a._numerator / a._denominator >= b._numerator / b._denominator)
                 return true;
@@ -92,7 +82,7 @@ namespace oop5
                 return false;
         }
 
-        public static bool operator <= (RationalNumbers a, RationalNumbers b)
+        public static bool operator <=(RationalNumbers a, RationalNumbers b)
         {
             if (a._numerator / a._denominator <= b._numerator / b._denominator)
                 return true;
@@ -102,7 +92,7 @@ namespace oop5
 
         public override string ToString() => $"{_numerator}/{_denominator}";
 
-        public static explicit operator int (RationalNumbers a)
+        public static explicit operator int(RationalNumbers a)
         {
             return (int)a._numerator / a._denominator;
         }
@@ -117,6 +107,29 @@ namespace oop5
             return (double)a._numerator / a._denominator;
         }
 
+        public bool Equals(RationalNumbers other)
+        {
+            if (other is null) return false;
+            if (ReferenceEquals(other, this)) return true;
+            return _numerator == other._numerator
+                && _denominator == other._denominator;
 
+
+        }
+
+        public override bool Equals(object obj) => Equals(obj as RationalNumbers);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = _numerator.GetHashCode();
+
+                hash = (hash * 397) ^ _denominator.GetHashCode();
+
+
+                return hash;
+            }
+        }
     }
 }
