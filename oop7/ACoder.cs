@@ -8,6 +8,7 @@ namespace oop7
 {
     public class ACoder : ICoder
     {
+
         public string Decode(string text)
         {
             string txt = "";
